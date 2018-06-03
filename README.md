@@ -8,4 +8,4 @@ $ npm install --save-dev gulp-uglify gulp-ruby-sass gulp-babel babel-core babel-
 ```
 
 ### Build command
-`$ gulp ` –– Compile assets when file changes are made, start Browsersync session
+`$ gulp ` –– Run tasks when file changes are made
