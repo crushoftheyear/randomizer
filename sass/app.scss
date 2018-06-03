@@ -1,0 +1,169 @@
+/* mixins */
+
+@import 'fonts';
+
+$brandon: 'brandon_grotesque_regularRg', 'Helvetica Neue', 'sans-serif';
+$brandonBold: 'brandon_grotesquebold', 'Helvetica Neue', 'sans-serif';
+$brandonItalic: 'brandon_grotesqueRgIt', 'Helvetica Neue', 'sans-serif';
+
+$bluem: #0a2fc4;
+$pink: #f08b9e;
+$dark: #333;
+
+
+
+@mixin media($operator, $breakpoint) {
+
+	      /* $breakpoint == "xsmall" */ $width: 568px;
+	@if      $breakpoint == "xxsmall" { $width: 468px;  }
+	@else if $breakpoint == "xsmall"  { $width: 568px;  }
+	@else if $breakpoint == "small"   { $width: 768px;  }
+	@else if $breakpoint == "medium"  { $width: 1024px; }
+	@else if $breakpoint == "large"   { $width: 1280px; }
+	@else if $breakpoint == "xlarge"  { $width: 1920px; }
+
+	 /* $operator == "to" */
+		$attribute: max-width;
+
+	@if $operator == "from" {
+		$attribute: min-width;
+		$width: ($width + 1px);
+	}
+
+	@media ($attribute: $width) {
+		@content;
+	}
+}
+
+
+* {
+	box-sizing: border-box;
+
+  &:focus { outline: none; }
+}
+
+div img { max-width: 100%; }
+
+
+/* utility classes */
+
+%text-left { text-align: left; }
+%text-center { text-align: center; }
+%text-right { text-align: right; }
+%unstyled { list-style: none; }
+
+
+/* styles */
+
+body {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  padding: 0;
+
+  background-color: $pink;
+  color: $bluem;
+	font-family: $brandon, 'Avenir', 'Helvetica', sans-serif;
+	font-size: 16px;
+	line-height: 1.6;
+
+	::selection { background: darken($pink, 2%); }
+
+	a {
+		color: $dark;
+		text-decoration: none;
+	}
+}
+
+.header,
+.content,
+.footer {
+	.container {
+		width: 85%;
+		max-width: 600px;
+		margin: auto;
+	}
+}
+
+.container {
+  flex: auto;
+  margin-bottom: 5rem;
+  @extend %text-center;
+}
+
+h1 {
+  line-height: 1.1;
+}
+
+form {
+  margin-top: 3rem;
+}
+
+input {
+  font-size: 1rem;
+  border-radius: 0;
+}
+
+input,
+button {
+  display: inline-block;
+  height: 40px;
+  padding: 0 1rem;
+  border: 0;
+  vertical-align: top;
+
+  font-family: 'Avenir', 'Helvetica', 'Arial';
+}
+
+button {
+  margin: auto;
+  background: $bluem;
+  color: #fff;
+  font-size: .8rem;
+  font-weight: 600;
+  cursor: pointer;
+
+  transition: background .1s ease-in-out;
+
+  @include media(from, small) {
+    &:hover {
+      background: darken($bluem, 10%);
+    }
+  }
+}
+
+.add {
+  margin-left: -6px;
+}
+
+.randomize {
+  display: block;
+  margin-top: 3rem;
+}
+
+ul {
+  padding-left: 0;
+  margin: 2rem 0;
+  @extend %unstyled;
+  font-weight: 600;
+}
+
+li + li {
+  margin-top: .7rem;
+}
+
+.result {
+  display: block;
+
+  span {
+    font-size: 3rem;
+    font-weight: 600;
+    line-height: 1.2;
+    border-bottom: 4px solid;
+  }
+}
+
+.refresh {
+  display: block;
+  margin-top: 3rem;
+}
